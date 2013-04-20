@@ -56,13 +56,17 @@ To use rsyslog within vagrant to forward messages to your OS X syslog (viewable 
 2. Set the rsyslog[:server_host] to "10.0.2.2"
 3. Run the following on the OS X host to allow it to run as a syslog server
 
-  sudo /usr/libexec/PlistBuddy -c "add :Sockets:NetworkListener dict" /System/Library/LaunchDaemons/com.apple.syslogd.plist
-  sudo /usr/libexec/PlistBuddy -c "add :Sockets:NetworkListener:SockServiceName string syslog" /System/Library/LaunchDaemons/com.apple.syslogd.plist
-  sudo /usr/libexec/PlistBuddy -c "add :Sockets:NetworkListener:SockType string dgram" /System/Library/LaunchDaemons/com.apple.syslogd.plist
-  sudo launchctl unload /System/Library/LaunchDaemons/com.apple.syslogd.plist
-  sudo launchctl load /System/Library/LaunchDaemons/com.apple.syslogd.plist
+```bash
+sudo /usr/libexec/PlistBuddy -c "add :Sockets:NetworkListener dict" /System/Library/LaunchDaemons/com.apple.syslogd.plist
+sudo /usr/libexec/PlistBuddy -c "add :Sockets:NetworkListener:SockServiceName string syslog" /System/Library/LaunchDaemons/com.apple.syslogd.plist
+sudo /usr/libexec/PlistBuddy -c "add :Sockets:NetworkListener:SockType string dgram" /System/Library/LaunchDaemons/com.apple.syslogd.plist
+sudo launchctl unload /System/Library/LaunchDaemons/com.apple.syslogd.plist
+sudo launchctl load /System/Library/LaunchDaemons/com.apple.syslogd.plist
+```
 
-Messages will now be viewable in Console.app. From Console.app you can add a new System Log Query to display messages from the Vagrant server by following these steps:
+Messages will now be viewable in Console.app.
+
+From Console.app you can add a new System Log Query to display messages from the Vagrant server by following these steps:
 
 1. Hit ⌘⌥N or File -> New System Log Query
 2. Name your query, under Search Name: (e.g. From Vagrant)
