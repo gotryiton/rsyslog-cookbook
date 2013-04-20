@@ -24,7 +24,6 @@ apt_repository "lucid-rsyslog-ppa" do
   keyserver "keyserver.ubuntu.com"
   key "239036A6"
   action :add
-  notifies :run, "execute[apt-get update]", :immediately
 end
 
 package "rsyslog" do
