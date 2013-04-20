@@ -50,6 +50,25 @@ Also, the server configuration will set up `log_dir` for each client, by date. S
 
     <%= @log_dir %>/YEAR/MONTH/DAY/HOSTNAME/"logfile"
 
+To use rsyslog within vagrant to forward messages to your OS X syslog (viewable in Console.app), do the following:
+
+  1. Change the rsyslog[:protocol] attribute to UDP
+  2. Set the rsyslog[:server_host] to "10.0.2.2"
+  3. Run the following on the OS X host to allow it to run as a syslog server
+
+    sudo /usr/libexec/PlistBuddy -c "add :Sockets:NetworkListener dict" /System/Library/LaunchDaemons/com.apple.syslogd.plist
+    sudo /usr/libexec/PlistBuddy -c "add :Sockets:NetworkListener:SockServiceName string syslog" /System/Library/LaunchDaemons/com.apple.syslogd.plist
+    sudo /usr/libexec/PlistBuddy -c "add :Sockets:NetworkListener:SockType string dgram" /System/Library/LaunchDaemons/com.apple.syslogd.plist
+    sudo launchctl unload /System/Library/LaunchDaemons/com.apple.syslogd.plist
+    sudo launchctl load /System/Library/LaunchDaemons/com.apple.syslogd.plist
+
+Messages will now be viewable in Console.app. From Console.app you can add a new System Log Query to display messages from the Vagrant server by following these steps:
+
+  1. Hit ⌘⌥N or File -> New System Log Query
+  2. Name your query, under Search Name: (e.g. From Vagrant)
+  3. For the condition change the first dropdown to `host` and in the input box enter the hostname of the Vagrant machine. So for a hostname of "vagrant" it would become "Host is equal to vagrant".
+  4. Hit OK and now you'll see the new query under System Log Queries in the Log List. That query will update automatically when new messages come in.
+
 LICENSE AND AUTHOR
 ==================
 

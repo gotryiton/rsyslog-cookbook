@@ -20,6 +20,7 @@
 default[:rsyslog][:log_dir] = "/srv/rsyslog"
 default[:rsyslog][:server] = false
 default[:rsyslog][:protocol] = "tcp"
+default[:rsyslog][:server_host] = "10.0.2.2"
 
 # for server from source installation
 default[:rsyslog][:url]      = 'http://www.rsyslog.com/files/download/rsyslog/rsyslog'
