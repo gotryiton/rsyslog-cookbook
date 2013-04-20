@@ -1,4 +1,4 @@
-<% case @protocol -%>
+<% case @protocol.downcase -%>
 <% when "tcp" -%>
 *.* @@<%= @server %>
 <% when "udp" -%>
