@@ -50,6 +50,9 @@ Also, the server configuration will set up `log_dir` for each client, by date. S
 
     <%= @log_dir %>/YEAR/MONTH/DAY/HOSTNAME/"logfile"
 
+OS X Console.app Setup
+======================
+
 To use rsyslog within vagrant to forward messages to your OS X syslog (viewable in Console.app), do the following:
 
 1. Change the rsyslog[:protocol] attribute to UDP
