@@ -96,6 +96,13 @@ template "/etc/rsyslog.conf" do
   notifies :restart, resources(:service => "rsyslog"), :delayed
 end
 
+template "/etc/logrotate.d/rsyslog" do
+  source "rsyslog.lograte.erb"
+  owner "root"
+  group "root"
+  mode 0644
+end
+
 if platform?("ubuntu")
   template "/etc/rsyslog.d/50-default.conf" do
     source "50-default.conf.erb"
